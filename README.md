@@ -10,18 +10,23 @@ npm run dev
 
 View the result at http://localhost:3000/web-tools.
 
-## Building for production
+## Running a production build locally
 
-Create the production buid:
-
+Remove any previous build:
 ```sh
-npm run build
+rm -rf doc-root
 ```
 
-Serve production build locally:     
-
+Build the project & put the build output in a folder structure that matches GitHub pages:
 ```sh
-npx http-server out/
+npm run build
+mkdir doc-root
+mv out doc-root/web-tools
+```
+
+Serve production build:
+```sh
+npx http-server doc-root
 ```
 
 View the result at http://localhost:8080/web-tools/.
