@@ -30,7 +30,8 @@ export default function Base64Encoder() {
     function onDecodeClick() {
         const plainText = decode(text);
         setText(plainText!);
-        setTextIsBase64(false);
+        const decodeAgainResult = decode(plainText!);
+        setTextIsBase64(decodeAgainResult !== null);
     }
 
     function decode(base64: string) {
@@ -52,7 +53,7 @@ export default function Base64Encoder() {
                 onChange={onTextChange} />
 
             <div className={styles.controls}>
-                <button disabled={text.length === 0 || textIsBase64} onClick={onEncodeClick}>Encode</button>
+                <button disabled={text.length === 0} onClick={onEncodeClick}>Encode</button>
                 <button disabled={text.length === 0 || !textIsBase64} onClick={onDecodeClick}>Decode</button>
             </div>
         </div>
