@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <>
       <header>
         <h1>{title}</h1>
         <p className="subtitle">{description}</p>
@@ -27,6 +27,6 @@ export default function Home() {
 
         <p>Code available on <Link href="https://github.com/gilessmart/web-tools">GitHub</Link></p>
       </main>
-    </div>
+    </>
   );
 }

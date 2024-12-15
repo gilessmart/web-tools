@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
     return (
-        <div className="page">
+        <>
             <header className="header">
                 <h1>{title}</h1>
                 <p className="subtitle">{description}</p>
@@ -20,6 +20,6 @@ export default function Page() {
             <main>
                 <Base64Encoder></Base64Encoder>
             </main>
-        </div>
+        </>
     );
 };
