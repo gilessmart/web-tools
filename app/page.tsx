@@ -21,7 +21,8 @@ export default function Home() {
       <main>
         <nav className={styles.mainNav}>
           <ul>
-            <li><Link href="/base64-encoder">Base64 Encoder</Link></li>
+            <li><Link href="/base64-encoder/">Base64 Encoder</Link></li>
+            <li><Link href="/string-escaper/">String Escaper</Link></li>
           </ul>
         </nav>
 
