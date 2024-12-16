@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Base64Encoder from "./base-64-encoder";
 
-const title = "Base64 Encoder / Decoder";
+const title = "Base64 Encoder";
 const description = "Converts text to / from base64";
 
 export const metadata: Metadata = {
