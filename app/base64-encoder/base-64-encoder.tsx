@@ -12,14 +12,18 @@ export default function Base64Encoder() {
     function onTextChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         const newText = event.target.value;
         setText(newText);
-        const decodeResult = decode(newText);
-        setTextIsBase64(decodeResult !== null);
+        setTextIsBase64(isBase64(newText));
     }
 
     function onEncodeClick() {
-        const base64 = encode(text);
-        setText(base64);
+        setText(encode(text));
         setTextIsBase64(true);
+    }
+
+    function onDecodeClick() {
+        const decodedText = decode(text);
+        setText(decodedText);
+        setTextIsBase64(isBase64(decodedText));
     }
 
     function encode(plainText: string) {
@@ -27,22 +31,22 @@ export default function Base64Encoder() {
         return Base64.stringify(uft8Words);
     }
 
-    function onDecodeClick() {
-        const plainText = decode(text);
-        setText(plainText!);
-        const decodeAgainResult = decode(plainText!);
-        setTextIsBase64(decodeAgainResult !== null);
+    function decode(base64: string) {
+        const uft8Words = Base64.parse(base64);
+        return Utf8.stringify(uft8Words);
     }
 
-    function decode(base64: string) {
+    function isBase64(candidate: string) {
+        // We round-trip the text to base64 and back, and check it still matches because CryptoJS 
+        // is quite liberal in what it will decode, producing a decoded result for strings like 
+        // "aa" and "YWE=!"£$%^*()" that I don't want to classify as base64.        
         try {
-            const uft8Words = Base64.parse(base64);
-            const plainText = Utf8.stringify(uft8Words);
-            return (plainText.length === 0) ? null : plainText;
+            const roundTripped = encode(decode(candidate));
+            return roundTripped === candidate;
         }
         catch {
-            return null;
-        }
+            return false;
+        }        
     }
 
     return (
